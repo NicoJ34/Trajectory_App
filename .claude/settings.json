@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'cd \"/Users/nicolasjouve/Cursor Project/Trajectory App\" && if [ -f \"apps/web/package.json\" ]; then echo \"[Check] Running TypeScript...\" && cd apps/web && npx tsc --noEmit 2>&1 | tail -3; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
