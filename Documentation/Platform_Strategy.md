@@ -1,20 +1,35 @@
 # PLATFORM & DISTRIBUTION STRATEGY
 ## Trajectory — Adaptive Running Training Planner
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 23 March 2026
 **Status:** Approved
 
 ---
 
+## Delivery Phasing
+
+Trajectory is built and released in 4 progressive MVPs. Each phase adds a new surface or infrastructure layer, validated before the next is built.
+
+| Phase | Surface | Data Storage | Auth | Goal |
+|---|---|---|---|---|
+| **MVP1** | Web (desktop) | Local — IndexedDB in browser | None | Validate UX + algorithm locally |
+| **MVP2** | Web (desktop) | Online — Supabase / PostgreSQL | Email + password | Add persistence, multi-device, deploy |
+| **MVP3** | iOS mobile | Online — shared with MVP2 | Supabase Auth | First mobile surface |
+| **MVP4** | Android mobile | Online — shared with MVP2 | Supabase Auth | Full mobile coverage |
+
+**Rationale:** Starting with a local web app eliminates all infrastructure complexity during the validation phase. No server, no auth, no deployment — just the product. Cloud and mobile come once the core experience is proven.
+
+---
+
 ## Overview
 
-Trajectory is delivered on two complementary surfaces:
+Trajectory is ultimately delivered on two complementary surfaces:
 
-1. **Mobile App** (primary surface) — daily use, on-the-go
-2. **Web App** (secondary surface) — planning, review, desktop overview
+1. **Web App** (MVP1 → MVP2) — desktop-first, then responsive
+2. **Mobile App** (MVP3 → MVP4) — iOS first, then Android
 
-This dual-surface approach reflects how intermediate runners actually interact with a training tool: they check their plan or log a session immediately after a run (mobile), but plan their race calendar or review analytics from a computer (web).
+This ordering reflects both validation priorities and development efficiency: the web allows fast iteration without app store cycles, and a single backend (Supabase) serves all surfaces from MVP2 onward.
 
 ---
 
@@ -138,16 +153,34 @@ Email service: **Resend** (via Supabase Edge Function trigger)
 
 ---
 
-## MVP Scope
+## Scope per Phase
 
-For MVP (Phase 1, Weeks 1-8 per PRD roadmap):
+### MVP1 — Web, Local
+- Full feature set of the app (onboarding, plan generation, session logging, adaptation, dashboard)
+- All data in IndexedDB — no auth, no server, no deployment required
+- Runs on `localhost:3000` — developer and close testers only
+- No notifications (no backend to send them)
+- Single user / single profile
 
-- Mobile app: session logging, weekly plan view, constraint input, basic dashboard
-- Web app: onboarding, race setup, weekly plan view, basic history
-- Offline session logging on mobile
-- Email notifications only (push notifications in Phase 2)
+### MVP2 — Web, Online
+- Same feature set, data migrated to Supabase
+- Auth: email + password
+- Deployed on Vercel (public URL)
+- Email notifications via Resend
+- Multi-race calendar
+- Beta testers (5-10 users)
 
-Full feature parity between surfaces is not a goal for MVP. Mobile-first for daily use; web for setup and review.
+### MVP3 — iOS
+- Mobile-optimized subset: dashboard, weekly plan, session logging, constraint input
+- Race management stays on web (larger screens)
+- Push notifications via Expo Push
+- Offline session logging with sync
+- TestFlight beta → App Store
+
+### MVP4 — Android
+- Same scope as MVP3
+- Android-specific testing (FCM notifications, Play Store policies)
+- Google Play Internal Testing → Play Store
 
 ---
 

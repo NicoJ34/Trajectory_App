@@ -411,38 +411,116 @@ Intégration plus profonde avec données sommeil/nutrition pour informer signaux
 
 ## 8. Roadmap de Développement
 
-### Phase 1 : MVP (Semaines 1–8)
+### Stratégie de Livraison
 
-- [ ] Onboarding & setup du profil utilisateur + épreuve cible (minimum 8 semaines)
-- [ ] Moteur de génération de plan jusqu'à date d'épreuve (structures hebdomadaires statiques)
+La livraison est découpée en 4 MVPs progressifs pour valider le produit avant d'investir dans l'infrastructure et les plateformes mobiles.
+
+---
+
+### MVP1 — Web App Desktop, Données Locales
+
+**Objectif :** Valider l'UX et l'algorithme d'adaptation sans infrastructure. Tout tourne en local sur la machine du développeur / testeur. Aucun compte, aucun serveur, aucun coût.
+
+**Surface :** Web app (Next.js), accessible via navigateur sur ordinateur
+**Données :** Stockage local navigateur (IndexedDB via `localforage`)
+**Auth :** Aucune — profil unique local
+
+- [ ] Onboarding & setup du profil utilisateur + épreuve cible
+- [ ] Moteur de génération de plan (client-side, TypeScript)
 - [ ] Validation : alerte si <8 semaines de préparation
+- [ ] Vue plan hebdomadaire
 - [ ] Enregistrement de séance (distance, temps, RPE, notes, altitude)
-- [ ] Input de contexte hebdomadaire (signalisation de contraintes)
-- [ ] Logique d'adaptation de base (performance + contraintes → modifications de séances)
-- [ ] Dashboard : semaine actuelle, résumé semaine dernière, compte à rebours épreuve
+- [ ] Signalisation de contraintes hebdomadaires
+- [ ] Logique d'adaptation de base (calcul client-side)
+- [ ] Dashboard : semaine actuelle, résumé, compte à rebours épreuve
 - [ ] Support 1 épreuve par plan
+- [ ] Toutes les données persistées en IndexedDB (survie au rechargement de page)
 
-### Phase 2 : Polish & Validation (Semaines 9–12)
+**Critères de succès MVP1 :**
+✅ Le développeur peut compléter un cycle d'entraînement de 8 semaines sans bug
+✅ L'algorithme génère et adapte des plans de façon cohérente
+✅ L'UX est fluide et compréhensible sans documentation
 
-- [ ] Test interne avec 5–10 coureurs beta
-- [ ] Refinement UX basé sur feedback
+---
+
+### MVP2 — Web App Desktop, Données en Ligne
+
+**Objectif :** Migrer les données vers le cloud. Permettre l'accès multi-appareil et préparer le terrain pour les apps mobiles.
+
+**Surface :** Web app (Next.js), déployée sur Vercel
+**Données :** Supabase (PostgreSQL)
+**Auth :** Email + mot de passe via Supabase Auth
+
+- [ ] Intégration Supabase (migration du schéma depuis les types TypeScript MVP1)
+- [ ] Authentification utilisateur (sign up, sign in, sign out)
+- [ ] Migration de tous les appels IndexedDB vers l'API Supabase
+- [ ] Moteur d'adaptation migré vers Supabase Edge Function
+- [ ] Cron hebdomadaire (génération plan semaine suivante — dimanche soir)
+- [ ] Notifications email (plan prêt, alerte fatigue)
+- [ ] Déploiement Vercel (accessible en ligne)
 - [ ] Fonctionnalité date d'épreuve flexible
 - [ ] Préférence route/trail par séance
-- [ ] **Calendrier d'épreuves multiples** (2–5 épreuves planifiées)
-- [ ] Gestion automatique phases transition/récupération entre épreuves
+- [ ] **Calendrier d'épreuves multiples** (2–5 épreuves)
+- [ ] Test avec 5–10 testeurs beta
 
-### Phase 3 : v1.1 (Semaines 13–16)
+**Critères de succès MVP2 :**
+✅ Les données survivent à la fermeture du navigateur et sont accessibles depuis un autre appareil
+✅ L'adaptation hebdomadaire se déclenche automatiquement
+✅ Feedback beta >7/10 satisfaction globale
 
-- [ ] Intégration zone cardiaque (import Garmin, Apple Watch)
+---
+
+### MVP3 — App iOS
+
+**Objectif :** Première app mobile. iOS en priorité (audience cible probablement majorité iPhone). Connectée au même backend Supabase que MVP2.
+
+**Surface :** App iOS via Expo (React Native)
+**Données :** Supabase (partagé avec MVP2)
+**Auth :** Supabase Auth (même compte qu'en web)
+
+- [ ] Setup Expo + configuration iOS
+- [ ] Authentification mobile (login/signup)
+- [ ] Dashboard mobile (session du jour, compte à rebours)
+- [ ] Vue plan hebdomadaire mobile
+- [ ] Formulaire d'enregistrement de séance (optimisé mobile, < 60 secondes)
+- [ ] Signalisation de contraintes
+- [ ] Enregistrement de séance hors ligne (sync au retour de connectivité)
+- [ ] Push notifications (plan prêt, alerte fatigue, compte à rebours course)
+- [ ] Build TestFlight pour beta iOS
+- [ ] Soumission App Store
+
+**Critères de succès MVP3 :**
+✅ Un utilisateur beta peut gérer tout son entraînement depuis son iPhone
+✅ Session logging fonctionne hors ligne
+✅ Push notifications reçues et pertinentes
+
+---
+
+### MVP4 — App Android
+
+**Objectif :** Étendre la couverture mobile à Android. Même codebase Expo que MVP3, ajustements spécifiques Android.
+
+**Surface :** App Android via Expo (même codebase que MVP3)
+**Données :** Supabase (partagé)
+
+- [ ] Build Android (EAS Build)
+- [ ] Tests spécifiques Android (différences UI, permissions, notifications FCM)
+- [ ] Beta via Google Play Internal Testing
+- [ ] Soumission Google Play Store
+
+**Critères de succès MVP4 :**
+✅ Parité fonctionnelle iOS / Android
+✅ Aucun bug critique spécifique Android
+
+---
+
+### Post-MVP (v1.1+)
+
+- [ ] Intégration zone cardiaque (Garmin, Apple Watch)
 - [ ] Métriques avancées (VO2 max, graphes charge hebdomadaire)
 - [ ] Intégration Strava
-- [ ] Test externe avec 20–30 utilisateurs
-- [ ] Affichage calendrier annuel avec tous les plans enchaînés
-
-### Phase 4+ : Futur (Mois 5+)
-
 - [ ] Fonctionnalités communautaires / sociales
-- [ ] Périodisation multi-sport (prep triathlon)
+- [ ] Périodisation multi-sport (triathlon)
 - [ ] Modèle prédiction blessures
 - [ ] Stratégie monétisation (freemium, tiers premium)
 

@@ -15,7 +15,23 @@ Trajectory creates personalized running training plans that adapt in real-time b
 ## Project Status
 
 **Stage:** Pre-Development — Discovery & Requirements
-**MVP Target:** Phase 1 (Weeks 1-8, see PRD roadmap)
+
+---
+
+## Delivery Roadmap
+
+| Phase | Surface | Data | Status |
+|---|---|---|---|
+| **MVP1** | Web app (desktop) | Local only (browser) | Next up |
+| **MVP2** | Web app (desktop) | Online (Supabase cloud) | Planned |
+| **MVP3** | iOS mobile app | Online (shared with MVP2) | Planned |
+| **MVP4** | Android mobile app | Online (shared with MVP2) | Planned |
+
+**Why this order?**
+- MVP1 lets you validate the full UX and algorithm with zero infrastructure cost
+- No auth, no cloud, no deployment — runs on your machine, data lives in the browser
+- MVP2 adds the backend once the product is validated
+- MVP3/4 add mobile surfaces once the web experience is proven
 
 ---
 
@@ -34,16 +50,16 @@ Trajectory creates personalized running training plans that adapt in real-time b
 
 ---
 
-## Tech Stack (Planned)
+## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Mobile | Expo (React Native) — iOS + Android |
-| Web | Next.js |
-| Backend / Database | Supabase (PostgreSQL + Auth + Storage) |
-| Adaptation Engine | Supabase Edge Functions |
-| Push Notifications | Expo Push + Email via Resend |
-| Language | TypeScript (shared across all surfaces) |
+| Layer | MVP1 | MVP2 | MVP3/4 |
+|---|---|---|---|
+| Web | Next.js (local) | Next.js + Supabase | — |
+| Mobile | — | — | Expo (React Native) |
+| Database | IndexedDB (browser) | Supabase / PostgreSQL | Supabase (shared) |
+| Auth | None | Supabase Auth | Supabase Auth |
+| Adaptation Engine | Client-side (browser) | Supabase Edge Functions | Supabase Edge Functions |
+| Language | TypeScript | TypeScript | TypeScript |
 
 ---
 

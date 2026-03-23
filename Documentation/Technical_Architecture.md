@@ -1,46 +1,94 @@
 # TECHNICAL ARCHITECTURE
 ## Trajectory — Adaptive Running Training Planner
 
-**Version:** 1.0
+**Version:** 1.1
 **Date:** 23 March 2026
 **Status:** Approved
 
 ---
 
-## Architecture Overview
+## Architecture by Phase
 
-Trajectory is a mobile-first + web application built on a shared backend. The architecture prioritizes developer velocity for a solo/small team, minimizes infrastructure management, and supports the adaptive planning loop defined in the PRD.
+The architecture evolves across 4 MVP phases. Each phase is a working product — not a prototype.
+
+### MVP1 — Local Web App
+
+Zero infrastructure. Everything runs in the browser.
 
 ```
-┌─────────────────────┐    ┌─────────────────────┐
-│   Mobile App        │    │   Web App           │
-│   Expo (RN)         │    │   Next.js           │
-│   iOS + Android     │    │   Vercel            │
-└────────┬────────────┘    └────────┬────────────┘
-         │                          │
-         └──────────┬───────────────┘
-                    │ Supabase SDK (TypeScript)
-                    ▼
-         ┌──────────────────────┐
-         │     Supabase         │
-         │  ┌────────────────┐  │
-         │  │  PostgreSQL DB │  │
-         │  └────────────────┘  │
-         │  ┌────────────────┐  │
-         │  │  Auth (JWT)    │  │
-         │  └────────────────┘  │
-         │  ┌────────────────┐  │
-         │  │  Edge Functions│  │ ← Adaptation Engine
-         │  └────────────────┘  │
-         │  ┌────────────────┐  │
-         │  │  Storage       │  │
-         │  └────────────────┘  │
-         └──────────────────────┘
+┌──────────────────────────────────────┐
+│         Browser (localhost:3000)     │
+│                                      │
+│   Next.js App (static, no SSR/API)  │
+│                                      │
+│   ┌──────────────────────────────┐  │
+│   │  Adaptation Engine (TS)      │  │
+│   │  Plan Generator (TS)         │  │
+│   └──────────────────────────────┘  │
+│                  │                   │
+│                  ▼                   │
+│   ┌──────────────────────────────┐  │
+│   │  IndexedDB (via localforage) │  │
+│   │  — users, plans, sessions,   │  │
+│   │    logs, constraints         │  │
+│   └──────────────────────────────┘  │
+└──────────────────────────────────────┘
+```
+
+No auth. No server. No deployment. Data lives in the browser until cleared.
+
+---
+
+### MVP2 — Web App + Cloud Backend
+
+Same Next.js frontend. IndexedDB replaced by Supabase.
+
+```
+┌──────────────────────────────┐
+│   Next.js App (Vercel)       │
+└──────────────┬───────────────┘
+               │ Supabase SDK
+               ▼
+  ┌────────────────────────┐
+  │       Supabase         │
+  │  PostgreSQL + Auth     │
+  │  Edge Functions (cron) │
+  └────────────────────────┘
+```
+
+---
+
+### MVP3 / MVP4 — Mobile Apps
+
+Expo app added alongside the web app. Same Supabase backend.
+
+```
+┌──────────────┐   ┌──────────────────────┐
+│  Expo (iOS)  │   │   Next.js (Vercel)   │
+│  Expo (Android)  └──────────┬───────────┘
+└──────┬───────┘              │
+       └──────────────────────┘
+                  │ Supabase SDK
+                  ▼
+       ┌────────────────────┐
+       │      Supabase      │
+       └────────────────────┘
 ```
 
 ---
 
 ## Tech Stack
+
+| Layer | MVP1 | MVP2 | MVP3/4 |
+|---|---|---|---|
+| Web | Next.js (local) | Next.js (Vercel) | — |
+| Mobile | — | — | Expo (React Native) |
+| Database | IndexedDB (browser) | Supabase / PostgreSQL | Supabase (shared) |
+| Auth | None | Supabase Auth | Supabase Auth |
+| Adaptation Engine | Client-side TypeScript | Supabase Edge Function | Supabase Edge Function |
+| Language | TypeScript | TypeScript | TypeScript |
+
+**Full target stack (MVP2+):**
 
 | Layer | Technology | Rationale |
 |---|---|---|
@@ -56,29 +104,90 @@ Trajectory is a mobile-first + web application built on a shared backend. The ar
 
 ---
 
+## MVP1 — Local Storage Design
+
+In MVP1, the browser's IndexedDB replaces the database. The library `localforage` provides a simple async key-value API over IndexedDB.
+
+**Library:** `localforage` (wraps IndexedDB with a clean Promise API)
+
+**Store structure (mirrors PRD data model):**
+
+```
+localforage stores:
+  "profile"       → single UserProfile object
+  "races"         → Record<id, Race>
+  "plans"         → Record<id, Plan>
+  "weeks"         → Record<id, Week>
+  "sessions"      → Record<id, Session>
+  "session_logs"  → Record<id, SessionLog>
+  "constraints"   → Record<id, UserConstraint>
+  "adaptation_logs" → Record<id, AdaptationLog>
+```
+
+**Data access layer:** A `db/` module in `/packages/shared` exposes typed functions (`getProfile()`, `savePlan()`, `listSessionLogs()`, etc.) that call localforage in MVP1. In MVP2, the same function signatures are reimplemented to call Supabase — the rest of the app code doesn't change.
+
+```typescript
+// packages/shared/src/db/interface.ts
+// MVP1: implemented with localforage
+// MVP2: reimplemented with supabase client
+export interface DB {
+  getProfile(): Promise<UserProfile | null>
+  saveProfile(profile: UserProfile): Promise<void>
+  createRace(race: Race): Promise<Race>
+  // ... all entities
+}
+```
+
+**Adaptation Engine in MVP1:** Runs as a pure TypeScript function called client-side (on page load / after session log). No cron — the user manually triggers "Generate next week" or it runs automatically when they open the Weekly Plan view.
+
+---
+
 ## Repository Structure
 
+### MVP1 (simplified)
 ```
 trajectory/
 ├── apps/
-│   ├── mobile/          # Expo React Native app
-│   │   ├── app/         # Expo Router screens
-│   │   ├── components/
-│   │   └── ...
-│   └── web/             # Next.js app
-│       ├── app/         # App Router pages
-│       ├── components/
-│       └── ...
+│   └── web/                  # Next.js app (MVP1: no SSR/API routes needed)
+│       ├── app/              # App Router pages
+│       └── components/
 ├── packages/
-│   ├── shared/          # Shared TypeScript types, utils
-│   │   ├── types/       # Database entity types (User, Plan, Session, etc.)
-│   │   ├── utils/       # Pace calculators, RPE helpers, date formatters
-│   │   └── api/         # Supabase client factory
-│   └── ui/              # Shared design system components (optional, v1.1)
+│   └── shared/
+│       ├── types/            # Entity types (User, Plan, Session, etc.)
+│       ├── utils/            # Pace calculators, RPE helpers, date utils
+│       ├── db/               # Data access layer (localforage in MVP1)
+│       │   ├── interface.ts  # DB interface (shared contract)
+│       │   └── local.ts      # localforage implementation
+│       └── engine/           # Adaptation + plan generation algorithm
+│           ├── generator.ts  # Plan generation
+│           └── adaptation.ts # Fatigue detection + adaptation rules
+└── package.json
+```
+
+### MVP2+ (full monorepo)
+```
+trajectory/
+├── apps/
+│   ├── mobile/               # Expo React Native app (MVP3+)
+│   │   ├── app/              # Expo Router screens
+│   │   └── components/
+│   └── web/                  # Next.js app
+│       ├── app/              # App Router pages
+│       └── components/
+├── packages/
+│   ├── shared/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   ├── db/
+│   │   │   ├── interface.ts  # Same interface as MVP1
+│   │   │   ├── local.ts      # localforage (kept for reference/testing)
+│   │   │   └── supabase.ts   # Supabase implementation (MVP2)
+│   │   └── engine/           # Same engine code as MVP1
+│   └── ui/                   # Shared design system (v1.1)
 ├── supabase/
-│   ├── migrations/      # Database schema migrations
-│   ├── functions/       # Edge Functions (adaptation engine, notifications)
-│   └── seed.sql         # Development seed data
+│   ├── migrations/           # DB schema
+│   ├── functions/            # Edge Functions
+│   └── seed.sql
 ├── turbo.json
 └── package.json
 ```
@@ -254,24 +363,39 @@ RESEND_API_KEY=              # Edge Functions only
 
 ## Development Setup
 
+### MVP1 — Local (minimal setup)
+
 ```bash
-# Prerequisites: Node 20+, pnpm, Supabase CLI, Expo CLI
+# Prerequisites: Node 20+, pnpm
 
 git clone https://github.com/NicoJ34/Trajectory_App
 cd Trajectory_App
 
 pnpm install
 
-# Start Supabase locally
-supabase start
+# Run web app — that's it, no other services needed
+pnpm --filter web dev
 
-# Apply migrations
+# Open http://localhost:3000
+# All data is stored in your browser's IndexedDB
+```
+
+### MVP2+ — With Supabase
+
+```bash
+# Additional prerequisites: Supabase CLI, Supabase account
+
+# Copy env file
+cp apps/web/.env.example apps/web/.env.local
+# Fill in NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+# Apply DB migrations
 supabase db push
 
 # Run web app
 pnpm --filter web dev
 
-# Run mobile app
+# Run mobile app (MVP3+)
 pnpm --filter mobile start
 ```
 
