@@ -26,26 +26,26 @@ Pour vider l'IndexedDB :
 
 | # | Action | Resultat attendu | Pass/Fail |
 |---|---|---|---|
-| TC-01 | Ouvrir `http://localhost:3000` | Redirect automatique vers `/onboarding` | |
-| TC-02 | Aller sur `/onboarding` | Page affichee SANS sidebar | |
-| TC-03 | Aller directement sur `/dashboard` | Page affichee AVEC sidebar visible (220px a gauche) | |
-| TC-04 | Aller sur `/dashboard` | Lien "Dashboard" mis en evidence dans la sidebar | |
-| TC-05 | Cliquer "Plan semaine" dans la sidebar | Navigation vers `/plan` sans rechargement complet de la page | |
-| TC-06 | Cliquer "Calendrier" dans la sidebar | Navigation vers `/races`, lien actif mis en evidence | |
-| TC-07 | Cliquer "Historique" dans la sidebar | Navigation vers `/history`, lien actif mis en evidence | |
-| TC-08 | Cliquer "Reglages" dans la sidebar | Navigation vers `/settings`, lien actif mis en evidence | |
-| TC-09 | Redimensionner la fenetre a ≥1280px | Layout lisible, sidebar et contenu visibles | |
-| TC-10 | Rafraichir la page sur `/dashboard` | Page se recharge correctement, sidebar toujours visible | |
+| TC-01 | Ouvrir `http://localhost:3000` | Redirect automatique vers `/onboarding` | Pass |
+| TC-02 | Aller sur `/onboarding` | Page affichee SANS sidebar | Pass |
+| TC-03 | Aller directement sur `/dashboard` | Page affichee AVEC sidebar visible (220px a gauche) | Pass |
+| TC-04 | Aller sur `/dashboard` | Lien "Dashboard" mis en evidence dans la sidebar | Pass |
+| TC-05 | Cliquer "Plan semaine" dans la sidebar | Navigation vers `/plan` sans rechargement complet de la page | Pass |
+| TC-06 | Cliquer "Calendrier" dans la sidebar | Navigation vers `/races`, lien actif mis en evidence | Pass |
+| TC-07 | Cliquer "Historique" dans la sidebar | Navigation vers `/history`, lien actif mis en evidence | Pass |
+| TC-08 | Cliquer "Reglages" dans la sidebar | Navigation vers `/settings`, lien actif mis en evidence | Pass |
+| TC-09 | Redimensionner la fenetre a ≥1280px | Layout lisible, sidebar et contenu visibles | Pass |
+| TC-10 | Rafraichir la page sur `/dashboard` | Page se recharge correctement, sidebar toujours visible | Pass |
 
 ### Cas limites
 
 | # | Scenario | Resultat attendu | Pass/Fail |
 |---|---|---|---|
-| CL-01 | Taper une URL inexistante (ex: `/foo`) | Page 404 Next.js, pas d'erreur JS dans la console | |
-| CL-02 | Ouvrir l'app dans un nouvel onglet | Meme comportement que TC-01 | |
+| CL-01 | Taper une URL inexistante (ex: `/foo`) | Page 404 Next.js, pas d'erreur JS dans la console | Pass |
+| CL-02 | Ouvrir l'app dans un nouvel onglet | Meme comportement que TC-01 | Pass |
 
 ### Resultat Sprint 0
-[ ] Pass &nbsp;&nbsp; [ ] Fail
+[x] Pass &nbsp;&nbsp; [ ] Fail
 
 ---
 

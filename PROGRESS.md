@@ -11,8 +11,8 @@
 |---|---|---|
 | Documentation | PRD, architecture, algo, UX, API, user stories | Termine |
 | Guardrails | CLAUDE.md, hooks, conventions | Termine |
-| Sprint 0 | Setup Next.js + shadcn + localforage + structure | **Termine** |
-| Sprint 1 | Types TypeScript + DB layer + moteur algo | **A faire** |
+| Sprint 0 | Setup Next.js + shadcn + localforage + structure | **Termine** (tests manuels valides 2026-03-24) |
+| Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **A faire** |
 | Sprint 2 | Onboarding 4 etapes | A faire |
 | Sprint 3 | Dashboard + Vue plan hebdomadaire | A faire |
 | Sprint 4 | Log seance + contraintes | A faire |
@@ -23,10 +23,11 @@
 
 ## Prochaine tache
 
-**Sprint 1 — Types TypeScript + DB layer + moteur algo**
-- Branche : `feat/sprint-1-types`
-- Objectif : definir tous les types TypeScript, implementer le DB layer (localforage), poser la structure du moteur algo
-- Acceptance criteria : REQ-03, REQ-11
+**Sprint 1 — Navigation Fix + Types TypeScript + DB layer**
+- Branche : `feat/sprint-1-foundation`
+- Objectif : corriger la navigation vers les nouvelles routes UX, definir les 10 types TypeScript complets, implementer le DB layer localforage complet (10 stores)
+- Acceptance criteria : REQ-01 (update), REQ-11
+- Note : le plan de sprint a ete revise apres l'ajout des specs UX dans `UX Documentation/MVP1/`
 
 ---
 
