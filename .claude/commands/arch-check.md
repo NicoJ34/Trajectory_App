@@ -1,3 +1,8 @@
+---
+description: "Execute this checklist before marking any task or step as done. Triggers: (1) a todo item is about to be checked off, (2) code changes touch components/pages/engine files, (3) user says 'étape terminée', 'c'est bon', 'step done', 'marque comme terminé'. Verifies MVP1 constraints: no Next.js API routes, no use server, data only via packages/shared/db/local.ts, algo engine only in packages/shared/engine/, no external network calls, no auth."
+allowed-tools: Read, Glob, Grep, Bash
+---
+
 # Arch Check — Checklist architecture MVP1
 
 Basé sur CLAUDE.md section "Checklist Architecture". À exécuter avant de marquer une tâche comme terminée.

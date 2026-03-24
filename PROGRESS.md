@@ -14,7 +14,7 @@
 | Sprint 0 | Setup Next.js + shadcn + localforage + structure | **Termine** (tests manuels valides 2026-03-24) |
 | Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **Termine** (tests manuels valides 2026-03-24) |
 | Sprint 2 | Moteur algo + Onboarding + Create Objective | **Termine** (tests manuels valides 2026-03-24) |
-| Sprint 3 | Dashboard + Vue plan hebdomadaire | A faire |
+| Sprint 3 | Dashboard + Vue plan hebdomadaire | **En cours** (tests manuels à valider) |
 | Sprint 4 | Log seance + contraintes | A faire |
 | Sprint 5 | Calendrier courses + reglages | A faire |
 | Sprint 6 | Tests bout-en-bout + corrections | A faire |
@@ -23,9 +23,9 @@
 
 ## Prochaine tache
 
-**Sprint 3 — Dashboard + Vue plan hebdomadaire**
-- Branche : `feat/sprint-3-dashboard` (à créer)
-- Objectif : dashboard principal, vue semaine courante, liste des sessions
+**Sprint 3 — Tests manuels à valider**
+- Branche : `feat/sprint-3-dashboard`
+- Tests auto : 106/106 passent
 - Acceptance criteria : REQ-04, REQ-05
 
 ---
