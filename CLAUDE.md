@@ -23,8 +23,19 @@ Application web de planification d'entrainement running, adaptative. MVP1 = web 
 **Format du plan :** voir `Plans/sprint-0-setup.md` comme reference.
 
 **Pendant l'implementation :**
-- A chaque etape de la todo list completee : mettre a jour `PROGRESS.md`, puis demander a l'utilisateur s'il veut committer sur la branche en cours avant de passer a la suivante.
-- En fin de sprint : mettre a jour `PROGRESS.md` (statut global, historique, prochaine tache), puis demander a l'utilisateur s'il veut merger la branche sur `main`.
+- A chaque etape de la todo list completee :
+  1. Ecrire tous les tests unitaires et automatises pertinents pour le code produit
+  2. Si applicable, creer un plan de test manuel (`tests/manual/sprint-N.md`) et demander a l'utilisateur de les executer
+  3. Lancer les tests — ne pas passer a l'etape suivante si des tests echouent
+  4. Mettre a jour `PROGRESS.md`
+  5. Demander a l'utilisateur s'il veut committer sur la branche en cours
+
+- En fin de sprint :
+  1. Relancer tous les tests (unit + composants + e2e si disponible)
+  2. Proposer un plan de test complet (recapitulatif des cas couverts + cas manuels restants)
+  3. Le sprint n'est pas considere comme termine tant que tous les tests ne passent pas
+  4. Mettre a jour `PROGRESS.md` (statut global, historique, prochaine tache)
+  5. Demander a l'utilisateur s'il veut merger la branche sur `main`
 
 ---
 
