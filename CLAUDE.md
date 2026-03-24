@@ -23,7 +23,8 @@ Application web de planification d'entrainement running, adaptative. MVP1 = web 
 **Format du plan :** voir `Plans/sprint-0-setup.md` comme reference.
 
 **Pendant l'implementation :**
-- A chaque etape de la todo list completee, demander a l'utilisateur s'il veut committer sur la branche en cours avant de passer a la suivante.
+- A chaque etape de la todo list completee : mettre a jour `PROGRESS.md`, puis demander a l'utilisateur s'il veut committer sur la branche en cours avant de passer a la suivante.
+- En fin de sprint : mettre a jour `PROGRESS.md` (statut global, historique, prochaine tache).
 
 ---
 
