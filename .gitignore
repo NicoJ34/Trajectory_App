@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+
+# OS
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+
+# Tests
+playwright-report/
+test-results/
+coverage/
+
+# Env
+.env
+.env*.local
