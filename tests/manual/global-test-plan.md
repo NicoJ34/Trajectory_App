@@ -49,9 +49,36 @@ Pour vider l'IndexedDB :
 
 ---
 
-## Sprint 1 — Types TypeScript + DB layer (REQ-03, REQ-11)
+## Sprint 1 — Navigation Fix + Types TypeScript + DB layer (REQ-01 update, REQ-11)
 
-> A completer apres implementation du Sprint 1
+### Setup
+- App lancee sur `http://localhost:3000`
+- IndexedDB vide
+
+### Cas de test — Navigation
+
+| # | Action | Resultat attendu | Pass/Fail |
+|---|---|---|---|
+| TC-11 | Aller sur `/dashboard` | Sidebar affiche : Dashboard, Nouvel objectif, Logger séance, Météo, Profil | |
+| TC-12 | Aller sur `/dashboard` | Aucun lien "Plan semaine", "Calendrier", "Réglages" dans la sidebar | |
+| TC-13 | Cliquer "Nouvel objectif" dans la sidebar | Navigation vers `/create-objective`, sidebar masquée | |
+| TC-14 | Cliquer "Logger séance" dans la sidebar | Navigation vers `/logger`, lien actif mis en évidence | |
+| TC-15 | Cliquer "Météo" dans la sidebar | Navigation vers `/weather`, lien actif mis en évidence | |
+| TC-16 | Cliquer "Profil" dans la sidebar | Navigation vers `/profile`, lien actif mis en évidence | |
+| TC-17 | Aller sur `/plan` | Redirect automatique vers `/dashboard` | |
+| TC-18 | Aller sur `/races` | Redirect automatique vers `/create-objective` | |
+| TC-19 | Aller sur `/settings` | Redirect automatique vers `/profile` | |
+| TC-20 | Aller sur `/add-session` | Page affichée SANS sidebar | |
+
+### Cas limites
+
+| # | Scenario | Resultat attendu | Pass/Fail |
+|---|---|---|---|
+| CL-03 | Rafraichir sur `/logger` | Page reload correctement, sidebar visible | |
+| CL-04 | Rafraichir sur `/create-objective` | Page reload correctement, sidebar masquée | |
+
+### Resultat Sprint 1
+[ ] Pass &nbsp;&nbsp; [ ] Fail
 
 ---
 
