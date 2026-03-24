@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Target, PenLine, CloudSun, User } from 'lucide-react'
+import { LayoutDashboard, CalendarDays, Target, PenLine, CloudSun, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/plan', label: 'Mon Plan', icon: CalendarDays },
   { href: '/create-objective', label: 'Nouvel objectif', icon: Target },
   { href: '/logger', label: 'Logger séance', icon: PenLine },
   { href: '/weather', label: 'Météo', icon: CloudSun },
