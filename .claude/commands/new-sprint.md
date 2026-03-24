@@ -1,3 +1,8 @@
+---
+description: "Initialize a new sprint. Triggers: (1) user says 'on commence le sprint N', 'nouveau sprint', 'start sprint', 'démarre le sprint', 'on attaque le sprint', (2) PROGRESS.md shows current sprint complete and next sprint not started, (3) user asks 'qu'est-ce qu'on fait ensuite' or 'c'est quoi la suite' after a sprint merge. Creates plan in Plans/, creates git branch, commits plan, sets up TodoWrite tasks."
+allowed-tools: Read, Write, Bash, Glob, Edit
+---
+
 # New Sprint — Démarrage d'un sprint
 
 Basé sur CLAUDE.md section "Avant de commencer chaque sprint". À invoquer au début de chaque nouveau sprint.

@@ -1,3 +1,8 @@
+---
+description: "Run the end-of-step sequence after finishing any sprint implementation step. Triggers: (1) a sprint todo item is completed, (2) user says 'étape terminée', 'j'ai fini cette étape', 'next step', 'passe à la suite', 'c'est bon on continue', (3) an implementation phase in the current sprint plan is done. Sequence: arch-check → write tests → run vitest → update manual test plan → update PROGRESS.md → ask for commit."
+allowed-tools: Read, Edit, Write, Bash, Glob
+---
+
 # Sprint Step — Checklist de fin d'étape
 
 L'étape courante vient d'être complétée. Exécute cette checklist dans l'ordre strict défini dans CLAUDE.md, sans sauter d'étape :

@@ -149,6 +149,23 @@ Un commit avec des erreurs TypeScript ou des tests en echec est INTERDIT.
 
 ---
 
+## Skills disponibles — Quand les invoquer
+
+Claude doit invoquer ces skills automatiquement dans les contextes suivants :
+
+| Skill | Declencher quand... |
+|---|---|
+| `/arch-check` | Avant de cocher une tache todo ; apres avoir modifie components/pages/engine |
+| `/sprint-step` | Des qu'une etape du sprint est implementee |
+| `/new-sprint` | L'utilisateur veut commencer un nouveau sprint |
+| `/pre-commit` | Avant tout `git commit` (y compris depuis sprint-step) |
+| `/end-of-sprint` | Toutes les etapes du sprint sont terminees ; l'utilisateur veut merger |
+
+**Regle** : ne jamais skip un skill de la sequence sprint. L'ordre est :
+`/new-sprint` → [implementation] → `/sprint-step` (×N) → `/end-of-sprint` → merge main
+
+---
+
 ## Commandes utiles
 
 ```bash

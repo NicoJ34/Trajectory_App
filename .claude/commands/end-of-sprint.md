@@ -1,3 +1,8 @@
+---
+description: "Run full sprint closure checklist. Triggers: (1) user says 'le sprint est terminé', 'fin de sprint', 'sprint done', 'on a fini le sprint', 'c'est bon le sprint', (2) all TodoWrite tasks for the sprint are checked off, (3) user asks to merge the branch to main. Runs: vitest, E2E tests, tsc+lint, full manual test plan with user confirmation, updates PROGRESS.md, creates closure commit, proposes merge to main."
+allowed-tools: Read, Edit, Write, Bash, Glob
+---
+
 # End of Sprint — Checklist de fin de sprint
 
 Le sprint vient d'être complété. Exécute cette checklist complète avant de considérer le sprint comme terminé. Basé sur CLAUDE.md section "En fin de sprint".

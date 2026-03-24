@@ -1,3 +1,8 @@
+---
+description: "Run mandatory quality gates before creating any git commit. Triggers: (1) about to execute 'git commit', (2) user says 'committe', 'commit', 'fais le commit', 'crée le commit', (3) sprint-step reaches the commit step. Runs in order: tsc --noEmit (zero errors), next lint (zero warnings), vitest run (all pass). Blocks commit on any failure."
+allowed-tools: Bash
+---
+
 # Pre-Commit — Checklist obligatoire avant tout commit
 
 Basé sur CLAUDE.md section "Avant chaque commit". Un commit avec des erreurs TypeScript ou des tests en échec est **INTERDIT**.
