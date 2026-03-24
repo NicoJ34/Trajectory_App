@@ -92,35 +92,35 @@ Pour vider l'IndexedDB :
 
 | # | Action | Résultat attendu | Pass/Fail |
 |---|---|---|---|
-| TC-21 | Aller sur `/onboarding` | Step 1/4 affiché, barre de progression à 25% | |
-| TC-22 | Étape 1 : ne rien remplir | Bouton "Continuer →" désactivé | |
-| TC-23 | Étape 1 : cliquer "Intermédiaire", saisir volume=40, jours=5 | Bouton "Continuer →" activé | |
-| TC-24 | Cliquer "Continuer →" depuis Step 1 | Step 2/4 affiché, barre à 50% | |
-| TC-25 | Étape 2 : ne pas sélectionner de distance | Bouton "Continuer →" désactivé | |
-| TC-26 | Étape 2 : cliquer "Marathon" | Carte Marathon sélectionnée (bordure mise en évidence) | |
-| TC-27 | Étape 2 : saisir une date < aujourd'hui | Message d'erreur "La date doit être dans le futur" et bouton désactivé | |
-| TC-28 | Étape 2 : saisir une date dans 3 semaines | Warning "Moins de 8 semaines" affiché, bouton activé | |
-| TC-29 | Étape 2 : saisir une date dans 20 semaines | Compteur "X semaines de préparation" affiché, bouton activé | |
-| TC-30 | Cliquer "← Retour" depuis Step 2 | Retour à Step 1 avec données préservées | |
-| TC-31 | Naviguer Step 2 → Step 3 | Step 3/4 affiché, barre à 75% | |
-| TC-32 | Étape 3 : ne rien remplir | Bouton "Voir mon plan →" désactivé | |
-| TC-33 | Étape 3 : sélectionner Dimanche, Renforcement, km | Bouton "Voir mon plan →" activé | |
-| TC-34 | Cliquer "Voir mon plan →" | Step 4/4 affiché, "Génération en cours…" puis plan présenté | |
-| TC-35 | Step 4 : vérifier le contenu | Nombre de semaines, phases (Base/Build/Peak/Taper), sessions semaine 1 visibles | |
-| TC-36 | Step 4 : cliquer "Commencer 🚀" | Bouton passe à "Enregistrement…" puis redirect vers `/dashboard` | |
-| TC-37 | Après redirect : vérifier IndexedDB | profile + race + plan + weeks + sessions présents dans les stores | |
+| TC-21 | Aller sur `/onboarding` | Step 1/4 affiché, barre de progression à 25% | Pass |
+| TC-22 | Étape 1 : ne rien remplir | Bouton "Continuer →" désactivé | Pass |
+| TC-23 | Étape 1 : cliquer "Intermédiaire", saisir volume=40, jours=5 | Bouton "Continuer →" activé | Pass |
+| TC-24 | Cliquer "Continuer →" depuis Step 1 | Step 2/4 affiché, barre à 50% | Pass |
+| TC-25 | Étape 2 : ne pas sélectionner de distance | Bouton "Continuer →" désactivé | Pass |
+| TC-26 | Étape 2 : cliquer "Marathon" | Carte Marathon sélectionnée (bordure mise en évidence) | Pass |
+| TC-27 | Étape 2 : essayer de sélectionner une date dans le passé | Impossible de sélectionner une date passée (bloqué par le champ date) | Pass |
+| TC-28 | Étape 2 : saisir une date dans 3 semaines | Warning "Moins de 8 semaines" affiché, bouton activé | Pass |
+| TC-29 | Étape 2 : saisir une date dans 20 semaines | Compteur "X semaines de préparation" affiché, bouton activé | Pass |
+| TC-30 | Cliquer "← Retour" depuis Step 2 | Retour à Step 1 avec données préservées | Pass |
+| TC-31 | Naviguer Step 2 → Step 3 | Step 3/4 affiché, barre à 75% | Pass |
+| TC-32 | Étape 3 : ne rien remplir | Bouton "Voir mon plan →" désactivé | Pass |
+| TC-33 | Étape 3 : sélectionner Dimanche, Renforcement, km | Bouton "Voir mon plan →" activé | Pass |
+| TC-34 | Cliquer "Voir mon plan →" | Step 4/4 affiché, "Génération en cours…" puis plan présenté | Pass |
+| TC-35 | Step 4 : vérifier le contenu | Nombre de semaines, phases (Base/Build/Peak/Taper), sessions semaine 1 visibles | Pass |
+| TC-36 | Step 4 : cliquer "Commencer 🚀" | Bouton passe à "Enregistrement…" puis redirect vers `/dashboard` | Pass |
+| TC-37 | Après redirect : vérifier IndexedDB | profile + race + plan + weeks + sessions présents dans les stores | Pass |
 
 ### Cas limites
 
 | # | Scénario | Résultat attendu | Pass/Fail |
 |---|---|---|---|
-| CL-05 | Saisir "Trail / Autre" à l'étape 2 sans remplir la distance personnalisée | Bouton "Continuer →" désactivé | |
-| CL-06 | Saisir "Trail / Autre" avec une distance custom (ex: 80 km) | Bouton activé, distanceKm = 80 en IndexedDB | |
-| CL-07 | Plan < 8 semaines : vérifier la Step 4 | Plan généré sans erreur, phases compressées affichées | |
-| CL-08 | Rafraîchir la page en cours d'onboarding | Retour à Step 1 (état non persisté entre rechargements, comportement attendu MVP1) | |
+| CL-05 | Saisir "Trail / Autre" à l'étape 2 sans remplir la distance personnalisée | Bouton "Continuer →" désactivé | Pass |
+| CL-06 | Saisir "Trail / Autre" avec une distance custom (ex: 80 km) | Bouton activé, distanceKm = 80 en IndexedDB | Pass |
+| CL-07 | Plan < 8 semaines : vérifier la Step 4 | Plan généré sans erreur, phases compressées affichées | Pass |
+| CL-08 | Rafraîchir la page en cours d'onboarding | Retour à Step 1 (état non persisté entre rechargements, comportement attendu MVP1) | Pass |
 
 ### Résultat Sprint 2 (Onboarding)
-[ ] Pass &nbsp;&nbsp; [ ] Fail
+[x] Pass &nbsp;&nbsp; [ ] Fail
 
 ---
 
@@ -128,35 +128,35 @@ Pour vider l'IndexedDB :
 
 | # | Action | Résultat attendu | Pass/Fail |
 |---|---|---|---|
-| TC-38 | Aller sur `/create-objective` | Step 1/3 affiché, barre de progression à 33% | |
-| TC-39 | Étape 1 : ne rien sélectionner | Bouton "Continuer →" désactivé | |
-| TC-40 | Étape 1 : cliquer "Semi-marathon" | Carte Semi-marathon mise en évidence, bouton activé | |
-| TC-41 | Étape 1 : cliquer "Trail / Autre" sans remplir la distance | Champ distance custom affiché, bouton désactivé | |
-| TC-42 | Étape 1 : saisir 80 km en mode custom | Bouton "Continuer →" activé | |
-| TC-43 | Cliquer "Continuer →" depuis Step 1 | Step 2/3 affiché | |
-| TC-44 | Étape 2 : laisser la date vide | Bouton "Continuer →" désactivé | |
-| TC-45 | Étape 2 : saisir une date passée | Erreur "La date doit être dans le futur", bouton désactivé | |
-| TC-46 | Étape 2 : saisir une date dans 20 semaines | Bouton activé, compteur semaines affiché | |
-| TC-47 | Cliquer "Continuer →" depuis Step 2 | Step 3/3 affiché avec résumé course et plan preview | |
-| TC-48 | Step 3 : vérifier le résumé | Distance, date, dénivelé (si rempli) visibles | |
-| TC-49 | Step 3 : cliquer "Créer l'objectif" | "Enregistrement…" puis redirect vers `/dashboard` | |
-| TC-50 | Après redirect : vérifier IndexedDB | race (status=planned) + plan + weeks + sessions présents | |
+| TC-38 | Aller sur `/create-objective` | Step 1/3 affiché, barre de progression à 33% | Pass |
+| TC-39 | Étape 1 : ne rien sélectionner | Bouton "Continuer →" désactivé | Pass |
+| TC-40 | Étape 1 : cliquer "Semi-marathon" | Carte Semi-marathon mise en évidence, bouton activé | Pass |
+| TC-41 | Étape 1 : cliquer "Trail / Autre" sans remplir la distance | Champ distance custom affiché, bouton désactivé | Pass |
+| TC-42 | Étape 1 : saisir 80 km en mode custom | Bouton "Continuer →" activé | Pass |
+| TC-43 | Cliquer "Continuer →" depuis Step 1 | Step 2/3 affiché | Pass |
+| TC-44 | Étape 2 : laisser la date vide | Bouton "Continuer →" désactivé | Pass |
+| TC-45 | Étape 2 : saisir une date passée | Erreur "La date doit être dans le futur", bouton désactivé | Pass |
+| TC-46 | Étape 2 : saisir une date dans 20 semaines | Bouton activé, compteur semaines affiché | Pass |
+| TC-47 | Cliquer "Continuer →" depuis Step 2 | Step 3/3 affiché avec résumé course et plan preview | Pass |
+| TC-48 | Step 3 : vérifier le résumé | Distance, date, dénivelé (si rempli) visibles | Pass |
+| TC-49 | Step 3 : cliquer "Créer l'objectif" | "Enregistrement…" puis redirect vers `/dashboard` | Pass |
+| TC-50 | Après redirect : vérifier IndexedDB | race (status=planned) + plan + weeks + sessions présents | Pass |
 
 ### Cas limites
 
 | # | Scénario | Résultat attendu | Pass/Fail |
 |---|---|---|---|
-| CL-09 | Accéder à `/create-objective` sans profil existant en IndexedDB | Message d'erreur à l'étape 3 (profil requis) | |
-| CL-10 | Cliquer "← Retour" depuis Step 3 | Retour à Step 2 avec données préservées | |
-| CL-11 | Course < 8 semaines : étape 3 | Plan généré avec phases compressées, pas d'erreur | |
+| CL-09 | Accéder à `/create-objective` sans profil existant en IndexedDB | Message d'erreur à l'étape 3 (profil requis) | Pass |
+| CL-10 | Cliquer "← Retour" depuis Step 3 | Retour à Step 2 avec données préservées | Pass |
+| CL-11 | Course < 8 semaines : étape 3 | Plan généré avec phases compressées, pas d'erreur | Pass |
 
 ### Résultat Sprint 2 (Create Objective)
-[ ] Pass &nbsp;&nbsp; [ ] Fail
+[x] Pass &nbsp;&nbsp; [ ] Fail
 
 ---
 
 ### Résultat Sprint 2 global
-[ ] Pass &nbsp;&nbsp; [ ] Fail
+[x] Pass &nbsp;&nbsp; [ ] Fail
 
 ---
 

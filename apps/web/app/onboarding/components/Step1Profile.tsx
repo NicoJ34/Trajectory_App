@@ -96,7 +96,10 @@ export default function Step1Profile({ data, onChange, onNext }: Step1ProfilePro
 
       {/* Terrain */}
       <div className="mb-5">
-        <label className="block text-sm font-medium mb-2">Terrain préféré</label>
+        <label className="block text-sm font-medium mb-2">
+          Terrain préféré{' '}
+          <span className="text-muted-foreground font-normal">(optionnel)</span>
+        </label>
         <div className="flex gap-3">
           {(['road', 'trail', 'both'] as Terrain[]).map((t) => (
             <label key={t} className="flex items-center gap-2 cursor-pointer">
