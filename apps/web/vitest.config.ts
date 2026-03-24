@@ -7,11 +7,12 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: [],
+    setupFiles: ['./vitest.setup.ts'],
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
+      '@trajectory/shared': path.resolve(__dirname, '../../packages/shared/src/index.ts'),
     },
   },
 })

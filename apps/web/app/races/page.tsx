@@ -1,7 +1,5 @@
+import { redirect } from 'next/navigation'
+
 export default function RacesPage() {
-  return (
-    <main>
-      <h1 className="text-2xl font-semibold">Calendrier courses</h1>
-    </main>
-  )
+  redirect('/create-objective')
 }
