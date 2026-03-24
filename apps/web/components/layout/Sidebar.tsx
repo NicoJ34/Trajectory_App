@@ -2,15 +2,15 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Calendar, CalendarDays, History, Settings } from 'lucide-react'
+import { LayoutDashboard, Target, PenLine, CloudSun, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/plan', label: 'Plan semaine', icon: Calendar },
-  { href: '/races', label: 'Calendrier', icon: CalendarDays },
-  { href: '/history', label: 'Historique', icon: History },
-  { href: '/settings', label: 'Réglages', icon: Settings },
+  { href: '/create-objective', label: 'Nouvel objectif', icon: Target },
+  { href: '/logger', label: 'Logger séance', icon: PenLine },
+  { href: '/weather', label: 'Météo', icon: CloudSun },
+  { href: '/profile', label: 'Profil', icon: User },
 ]
 
 export default function Sidebar() {

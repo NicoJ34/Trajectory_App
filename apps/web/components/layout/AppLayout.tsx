@@ -3,11 +3,11 @@
 import { usePathname } from 'next/navigation'
 import Sidebar from './Sidebar'
 
-const NO_SIDEBAR_ROUTES = ['/onboarding']
+const NO_SIDEBAR_ROUTES = ['/onboarding', '/create-objective', '/add-session']
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const showSidebar = !NO_SIDEBAR_ROUTES.includes(pathname)
+  const showSidebar = !NO_SIDEBAR_ROUTES.some((route) => pathname.startsWith(route))
 
   if (!showSidebar) {
     return <>{children}</>
