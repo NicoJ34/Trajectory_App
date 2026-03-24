@@ -21,9 +21,10 @@ cd apps/web && npx vitest run
 **Si des tests échouent : STOP. Corriger avant de continuer.**
 
 ## 4. Test plan manuel
-- Ouvrir `tests/manual/global-test-plan.md`
-- Vérifier que la section du sprint en cours contient les cas de test de cette étape
-- Si des cas manquent, les ajouter maintenant
+- Le test plan de chaque sprint est dans son propre fichier : `tests/manual/sprint-N.md`
+- Si le fichier n'existe pas encore, le créer avec le format standard (Setup, Cas de test, Cas limites, Résultat global)
+- Vérifier que le fichier contient les cas de test de cette étape — si des cas manquent, les ajouter
+- Mettre à jour le statut dans `tests/manual/global-test-plan.md` (tableau des sprints) après validation
 - Afficher les cas à exécuter et **demander à l'utilisateur de les exécuter**
 - **Attendre la confirmation Pass/Fail avant de continuer**
 
