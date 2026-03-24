@@ -12,8 +12,8 @@
 | Documentation | PRD, architecture, algo, UX, API, user stories | Termine |
 | Guardrails | CLAUDE.md, hooks, conventions | Termine |
 | Sprint 0 | Setup Next.js + shadcn + localforage + structure | **Termine** (tests manuels valides 2026-03-24) |
-| Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **A faire** |
-| Sprint 2 | Onboarding 4 etapes | A faire |
+| Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **Termine** |
+| Sprint 2 | Moteur algo + Onboarding + Create Objective | A faire |
 | Sprint 3 | Dashboard + Vue plan hebdomadaire | A faire |
 | Sprint 4 | Log seance + contraintes | A faire |
 | Sprint 5 | Calendrier courses + reglages | A faire |
@@ -23,15 +23,31 @@
 
 ## Prochaine tache
 
-**Sprint 1 — Navigation Fix + Types TypeScript + DB layer**
-- Branche : `feat/sprint-1-foundation`
-- Objectif : corriger la navigation vers les nouvelles routes UX, definir les 10 types TypeScript complets, implementer le DB layer localforage complet (10 stores)
-- Acceptance criteria : REQ-01 (update), REQ-11
-- Note : le plan de sprint a ete revise apres l'ajout des specs UX dans `UX Documentation/MVP1/`
+**Sprint 2 — Moteur Algo + Onboarding + Create Objective**
+- Branche : `feat/sprint-2-engine-onboarding`
+- Objectif : moteur de generation de plan (Base/Build/Peak/Taper), wizard onboarding 4 etapes, wizard create-objective 3 etapes
+- Acceptance criteria : REQ-02, REQ-03
 
 ---
 
 ## Historique
+
+### 2026-03-24 — Sprint 1 : Navigation Fix + Types + DB Layer
+**Branche :** `feat/sprint-1-foundation` (commit `20620d7`)
+
+- Sidebar mise a jour : nouvelles routes UX (dashboard, create-objective, logger, weather, profile)
+- AppLayout : NO_SIDEBAR_ROUTES etendu (/create-objective, /add-session)
+- 5 nouvelles pages stub : /logger, /create-objective, /add-session, /weather, /profile
+- Redirects : /plan → /dashboard, /races → /create-objective, /settings → /profile
+- 10 types TypeScript complets + enums (UserProfile, Race, Plan, Week, Session, SessionLog, UserConstraint, AdaptationLog, ReferenceTime, TrainingLocation)
+- Schemas Zod : UserProfile, Race, SessionLog, UserConstraint
+- DB interface + implementation localforage complete (10 stores, CRUD, exportAll, clearAll)
+- generateId() utility (crypto.randomUUID avec fallback)
+- vitest : setup @testing-library/jest-dom, alias @trajectory/shared
+- 22 tests passent (Sidebar navigation, schemas Zod, DB mock)
+- REQ-01 update + REQ-11 : **valides**
+
+---
 
 ### 2026-03-24 — Sprint 0 : Setup projet
 **Branche :** `feat/sprint-0-setup` (commits `50945dc` → `223f32f`)
