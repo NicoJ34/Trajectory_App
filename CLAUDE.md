@@ -12,6 +12,18 @@ Application web de planification d'entrainement running, adaptative. MVP1 = web 
 
 ---
 
+## Workflow Sprint
+
+**Avant de commencer chaque sprint :**
+1. Preparer un plan detaille (contexte, etapes, fichiers cibles, verification)
+2. Sauvegarder le plan dans `Plans/sprint-N-nom.md` (ex: `Plans/sprint-0-setup.md`)
+3. Faire approuver le plan avant d'implementer
+4. Committer le plan avec le code du sprint
+
+**Format du plan :** voir `Plans/sprint-0-setup.md` comme reference.
+
+---
+
 ## Regles de branches Git
 
 | Regle | Detail |
