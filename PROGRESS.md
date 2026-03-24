@@ -12,7 +12,7 @@
 | Documentation | PRD, architecture, algo, UX, API, user stories | Termine |
 | Guardrails | CLAUDE.md, hooks, conventions | Termine |
 | Sprint 0 | Setup Next.js + shadcn + localforage + structure | **Termine** (tests manuels valides 2026-03-24) |
-| Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **Termine** |
+| Sprint 1 | Navigation Fix + Types TypeScript + DB layer | **Termine** (tests manuels valides 2026-03-24) |
 | Sprint 2 | Moteur algo + Onboarding + Create Objective | A faire |
 | Sprint 3 | Dashboard + Vue plan hebdomadaire | A faire |
 | Sprint 4 | Log seance + contraintes | A faire |
